@@ -19,9 +19,7 @@ public class TicketmasterController {
     }
 
     @GetMapping("/events")
-    public JsonNode searchEvents(
-            @RequestParam(defaultValue = "Tampa") String city) {
-
+    public JsonNode searchEvents(@RequestParam String city) {
         return ticketmasterService.searchEvents(city);
     }
 }

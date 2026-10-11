@@ -14,6 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/concert-plans")
@@ -35,7 +37,7 @@ public class ConcertPlanController {
         return concertPlanRepository.findAll()
                 .stream()
                 .map(ConcertPlanResponse::from)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")

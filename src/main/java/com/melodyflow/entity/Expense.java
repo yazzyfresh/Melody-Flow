@@ -18,9 +18,6 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "concert_plan_id", nullable = false)
-    private ConcertPlan concertPlan;
 
     @NotBlank
     @Size(max = 30)
@@ -40,6 +37,10 @@ public class Expense {
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "concert_plan_id", nullable = false)
+    private ConcertPlan concertPlan;
 
     public Expense() {
     }

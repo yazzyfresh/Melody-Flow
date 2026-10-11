@@ -1,3 +1,4 @@
+
 package com.melodyflow.entity;
 
 import jakarta.persistence.*;
@@ -46,6 +47,13 @@ public class SavedConcert {
         this.concert = concert;
         this.status = status;
         this.savedAt = LocalDateTime.now();
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        if (savedAt == null) {
+            savedAt = LocalDateTime.now();
+        }
     }
 
     public Long getId() {

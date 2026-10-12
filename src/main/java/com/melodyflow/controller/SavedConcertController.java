@@ -42,9 +42,7 @@ public class SavedConcertController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSavedConcert(@PathVariable Long id) {
-
         savedConcertService.deleteById(id);
-
         return ResponseEntity.noContent().build();
     }
 }

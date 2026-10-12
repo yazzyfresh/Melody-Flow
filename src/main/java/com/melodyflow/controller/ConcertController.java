@@ -1,12 +1,13 @@
+
 package com.melodyflow.controller;
 
+import com.melodyflow.dto.TicketmasterEventRequest;
 import com.melodyflow.entity.Concert;
 import com.melodyflow.service.ConcertService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -30,4 +31,13 @@ public class ConcertController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @PostMapping("/from-ticketmaster")
+    public ResponseEntity<Concert> saveTicketmasterEvent(
+            @Valid @RequestBody TicketmasterEventRequest request
+    ) {
+        Concert concert = concertService.saveTicketmasterEvent(request);
+        return ResponseEntity.ok(concert);
+    }
 }
+

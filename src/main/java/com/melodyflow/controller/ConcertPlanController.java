@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping("/api/concert-plans")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -87,6 +86,16 @@ public class ConcertPlanController {
         ConcertPlan updatedPlan = concertPlanRepository.save(plan);
 
         return ConcertPlanResponse.from(updatedPlan);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePlan(@PathVariable Long id) {
+        ConcertPlan plan = concertPlanRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Concert plan not found"));
+
+        concertPlanRepository.delete(plan);
     }
 
     public record ConcertPlanResponse(
